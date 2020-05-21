@@ -1,5 +1,5 @@
 public class Planet {
-	public static final double G = 6.67e-11; //gravitational constant
+	private static final double G = 6.67e-11; //gravitational constant
 	public double xxPos; //current x position
 	public double yyPos; //current y position
 	public double xxVel; //current x velocity
@@ -85,5 +85,11 @@ public class Planet {
 
 		this.xxPos = this.xxPos + this.xxVel * dt;
 		this.yyPos = this.yyPos + this.yyVel * dt;
+	}
+
+	/*draw the Planet’s image at the Planet’s position*/
+	public void draw() {
+		// (x, y, img) put img on (x, y) position
+		StdDraw.picture(this.xxPos, this.yyPos, "images/" + this.imgFileName);
 	}
 }

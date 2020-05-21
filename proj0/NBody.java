@@ -5,7 +5,7 @@ public class NBody {
 
 	public static void main (String[] args) {
 		/*loading parameters*/
-		double T = Double.parseDouble(args[0]);
+		double T = Double.parseDouble(args[0]); //total time
 		double dt = Double.parseDouble(args[1]);
 
 		String filename = args[2];
@@ -16,26 +16,25 @@ public class NBody {
  		drawBackground(radius);
  		/* Draw Planets */
 	    drawPlanets(allPlanets);
-
 	    /* Show */
 	    StdDraw.show();
 
 	    /* Animations */
-	    StdDraw.enableDoubleBuffering();
+	    StdDraw.enableDoubleBuffering();//prevent flickering in the animation
 	    double t = 0;
 	    while (t < T) {
 			/* calc forces */
 			double[] xForces = new double[allPlanets.length];
 			double[] yForces = new double[allPlanets.length];
 
-			for (int i = 0; i < allPlanets.length; ++i) {
+			for (int i = 0; i < allPlanets.length; i++) {
 				Planet p1 = allPlanets[i];
 				xForces[i] = p1.calcNetForceExertedByX(allPlanets);
 				yForces[i] = p1.calcNetForceExertedByY(allPlanets);
 			}
 		
 
-			/* update */
+			/* update on each of the planets’s position, velocity, and acceleration.*/
 			for (int i = 0; i < allPlanets.length; ++i) {
 				Planet p = allPlanets[i];
 				p.update(dt, xForces[i], yForces[i]);
@@ -46,6 +45,15 @@ public class NBody {
 			}
 
 			t += dt;
+		}
+
+		// print out the final states of all planets after reaching time T
+		StdOut.printf("%d\n", allPlanets.length);
+		StdOut.printf("%.2e\n", radius);
+		for (int i = 0; i < allPlanets.length; i++) {
+		    StdOut.printf("%11.4e %11.4e %11.4e %11.4e %11.4e %12s\n",
+		                  allPlanets[i].xxPos, allPlanets[i].yyPos, allPlanets[i].xxVel,
+		                  allPlanets[i].yyVel, allPlanets[i].mass, allPlanets[i].imgFileName);   
 		}
 	}
 
@@ -85,15 +93,19 @@ public class NBody {
 	}
 
 	private static void drawBackground(double radius) {
-	    StdDraw.setScale(-radius, radius);
-	    StdDraw.clear();
-	    StdDraw.picture(0, 0, "images/starfield.jpg");
+	    StdDraw.setScale(-radius, radius); /*The arguments are the coordinates of the minimum and maximum 
+	    									x- or y-coordinates that will appear in the canvas*/	    
+	    // StdDraw.clear();
+	    StdDraw.picture(0, 0, "images/starfield.jpg"); /*StdDraw.picture(x, y, filename) 
+	    												plots the image in the given filename on the canvas, 
+	    												centered on (x, y)
+  														*/
   	}
 
+	/*draw each one of the planets in the planets array you created*/
   	private static void drawPlanets(Planet[] allPlanets) {
 	    for (Planet p : allPlanets) {
-	    	StdDraw.picture(p.xxPos, p.yyPos, "images/" + p.imgFileName);
-	      // p.draw();
+	      p.draw();
 	    }
   	}
 }
