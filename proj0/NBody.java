@@ -34,7 +34,7 @@ public class NBody {
 			}
 		
 
-			/* update on each of the planets¡¯s position, velocity, and acceleration.*/
+			/* update on each of the planet's position, velocity, and acceleration.*/
 			for (int i = 0; i < allPlanets.length; ++i) {
 				Planet p = allPlanets[i];
 				p.update(dt, xForces[i], yForces[i]);
