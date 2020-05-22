@@ -37,7 +37,6 @@ public class IntList {
      * Returns a list equal to L with all elements squared. Destructive.
      */
     public static void dSquareList(IntList L) {
-
         while (L != null) {
             L.first = L.first * L.first;
             L = L.rest;
@@ -82,28 +81,37 @@ public class IntList {
 
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        if (A == null) { // corner case
+            return B;
+        }
+        IntList ptr = A;
+        while (ptr.rest != null) {
+            ptr = ptr.rest;
+        }
+        /* now, ptr points to the last IntList */
+        ptr.rest = B;
+        return A;
     }
 
     /**
      * Returns a list consisting of the elements of A followed by the
      * * elements of B.  May NOT modify items of A.  Use 'new'.
+     * this method is the solution from
+     * https://github.com/aviatesk/cs61b-sp18/blob/master/lab2/Intlist/IntList.java
      */
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        IntList newA = new IntList(A.first, null);
+        IntList res = newA;
+        IntList currentA = A.rest;
+        while (currentA != null) {
+            res.rest = new IntList(currentA.first, null);
+            res = res.rest;
+            currentA = currentA.rest;
+        }
+        res.rest = B;
+        return newA;
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
