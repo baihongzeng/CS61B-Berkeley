@@ -21,13 +21,14 @@ public class ArrayDeque<T> {
 
         if (start == 0) {
             T temp = x;
-            for (int i = 0; i <= end - start; i++) {
+            for (int i = start; i <= end; i++) {
                 T temp2 = item[i];
                 item[i] = temp;
                 temp = temp2;
             }
             end++;
         } else {
+            item[start - 1] = x;
             start--;
         }
     }

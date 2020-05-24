@@ -1,5 +1,5 @@
-public class LinkedListDeque<T> {
-    /*nested class of elements in linked list deque*/
+public class LinkedListDeque<T> { // use circular linked list as data structure
+    /*Nested class, representing elements in linked list deque*/
     private class Node { //should be private
         private T item;
         private Node prev;
@@ -9,12 +9,11 @@ public class LinkedListDeque<T> {
             item = x;
             prev = null;
             next = null;
-
         }
     }
 
-    // instance variables
-    private Node head; // sentinel node
+    // instance variables, should be private
+    private Node head; // i.e. sentinel node
     private int size;
 
     /*Adds an item of type T to the front of the deque.
@@ -28,6 +27,7 @@ public class LinkedListDeque<T> {
 
         size += 1;
     }
+
     /* Adds an item of type T to the back of the deque.
      * time complexity: O(1)*/
     public void addLast(T item) {
@@ -39,11 +39,6 @@ public class LinkedListDeque<T> {
 
         size += 1;
     }
-
-    /*  *//*Same as get, but uses recursion.*//*
-  public T getRecursive(int index) {
-
-  }*/
 
     /*Returns true if deque is empty, false otherwise.*/
     public boolean isEmpty() {
@@ -83,7 +78,8 @@ public class LinkedListDeque<T> {
     }
 
     /*Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth.
-    If no such item exists, returns null. Must not alter the deque!*/
+    If no such item exists, returns null. Must not alter the deque!
+    time complexity: O(n)*/
     public T get(int index) {
         if (size == 0 || index >= size || index < 0) { //corner case
             return null;
@@ -96,6 +92,7 @@ public class LinkedListDeque<T> {
         }
         return current.next.item;
     }
+
     /*Same as get, but uses recursion.*/
     public T getRecursive(int index) {
         if (size == 0 || index >= size || index < 0) { //corner case
@@ -105,6 +102,7 @@ public class LinkedListDeque<T> {
         return getRecursiveHelper(index, current);
     }
 
+    /* Helper function called by getRecursive() to do recursion*/
     private T getRecursiveHelper(int index, Node current) {
         if (index == 0) {
             return current.next.item;
@@ -115,7 +113,7 @@ public class LinkedListDeque<T> {
     }
 
     /*Creates an empty linked list deque.*/
-    //用链表来做double ended queue, 那就是要双向链表，
+    //用链表来做double ended queue, 用的是循环链表
     public LinkedListDeque() {
         head = new Node(null);
         head.prev = head; // circular linked list
