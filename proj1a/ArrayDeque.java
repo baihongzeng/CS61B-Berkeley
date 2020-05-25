@@ -9,8 +9,19 @@ public class ArrayDeque<T> {
     private final double expandRatio = 1.5;
     private final double usageRatio = 0.25;
 
-//    public static void main(String[] args) {
-//        ArrayDeque array = new ArrayDeque();
+    public static void main(String[] args) {
+        ArrayDeque array = new ArrayDeque();
+        array.addLast(0);
+        array.removeFirst(); //     ==> 0
+        array.addLast(2); //
+        array.addLast(3);
+        array.removeFirst(); //     ==> 2
+        array.addLast(5);
+        array.removeFirst(); //     ==> 3
+        array.removeFirst(); //     ==> 5
+        array.isEmpty();
+        array.addLast(9);
+
 //        array.addLast(0);
 //        array.removeLast(); // ==> 0
 //        array.addLast(2);
@@ -28,7 +39,7 @@ public class ArrayDeque<T> {
 //        array.get(0); //      ==> 2
 //        array.removeFirst(); //     ==> 2
 //        array.addLast(16);
-//    }
+    }
 
     /*check if the array is separated into two segments or one continuous segment*/
     private boolean endInFrontOfStart() {
@@ -108,10 +119,12 @@ public class ArrayDeque<T> {
         if (sizeQueue >= sizeArray) {
             resize();
         }
-        item[end] = x;
+//        item[end] = x;
         if (end == sizeArray) { // go to start of the array
+            item[end - 1] = x;
             end = 0;
         } else { // simply add in the back
+            item[end] = x;
             end++;
         }
         sizeQueue++;
