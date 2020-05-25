@@ -9,21 +9,26 @@ public class ArrayDeque<T> {
     private final double expandRatio = 1.5;
     private final double usageRatio = 0.25;
 
-    public static void main(String[] args) {
-        ArrayDeque array = new ArrayDeque();
-        array.addFirst(0);
-        array.size();
-        array.addFirst(2);
-        array.addLast(3);
-        array.addLast(4);
-        array.addLast(5);
-        array.addLast(6);
-        array.addFirst(7);
-        array.size();
-        array.size();
-        array.addLast(10);
-        array.addFirst(11);
-    }
+//    public static void main(String[] args) {
+//        ArrayDeque array = new ArrayDeque();
+//        array.addLast(0);
+//        array.removeLast(); // ==> 0
+//        array.addLast(2);
+//        array.addLast(3);
+//        array.get(1); //      ==> 3
+//        array.addLast(5);
+//        array.addLast(6);
+//        array.addFirst(7);
+//        array.removeLast();     // ==> 6
+//        array.removeLast();     // ==> 5
+//        array.removeLast();     // ==> 3
+//        array.removeFirst();   //  ==> 7
+//        array.addFirst(12);
+//        array.removeFirst(); //    ==> 12
+//        array.get(0); //      ==> 2
+//        array.removeFirst(); //     ==> 2
+//        array.addLast(16);
+//    }
 
     /*check if the array is separated into two segments or one continuous segment*/
     private boolean endInFrontOfStart() {
@@ -51,7 +56,7 @@ public class ArrayDeque<T> {
 
     /*resize T[] item down when too many items are removed.*/
     private void resizeDown() {
-        int newLength = (int) (sizeArray * usageRatio);
+        int newLength = (int) (sizeArray * usageRatio * 2);
         T[] destArray = (T[]) new Object[newLength];
 //        int larger = (end > (int) usageRatio * 2 * sizeArray)
 //                ? end : ((int) usageRatio * 2 * sizeArray);
@@ -104,7 +109,7 @@ public class ArrayDeque<T> {
             resize();
         }
         item[end] = x;
-        if (end + 1 == sizeArray) { // go to start of the array
+        if (end == sizeArray) { // go to start of the array
             end = 0;
         } else { // simply add in the back
             end++;
