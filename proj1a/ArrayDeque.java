@@ -11,34 +11,14 @@ public class ArrayDeque<T> {
 
     public static void main(String[] args) {
         ArrayDeque array = new ArrayDeque();
-        array.addLast(0);
-        array.removeFirst(); //     ==> 0
-        array.addLast(2); //
+        array.addFirst(0);
+        array.get(0); //      ==> 0
+        array.removeLast(); //      ==> 0
         array.addLast(3);
-        array.removeFirst(); //     ==> 2
-        array.addLast(5);
-        array.removeFirst(); //     ==> 3
+        array.addLast(4);
+        array.addFirst(5);
         array.removeFirst(); //     ==> 5
-        array.isEmpty();
-        array.addLast(9);
-
-//        array.addLast(0);
-//        array.removeLast(); // ==> 0
-//        array.addLast(2);
-//        array.addLast(3);
-//        array.get(1); //      ==> 3
-//        array.addLast(5);
-//        array.addLast(6);
-//        array.addFirst(7);
-//        array.removeLast();     // ==> 6
-//        array.removeLast();     // ==> 5
-//        array.removeLast();     // ==> 3
-//        array.removeFirst();   //  ==> 7
-//        array.addFirst(12);
-//        array.removeFirst(); //    ==> 12
-//        array.get(0); //      ==> 2
-//        array.removeFirst(); //     ==> 2
-//        array.addLast(16);
+        array.removeFirst(); //     ==> 4
     }
 
     /*check if the array is separated into two segments or one continuous segment*/
@@ -119,12 +99,10 @@ public class ArrayDeque<T> {
         if (sizeQueue >= sizeArray) {
             resize();
         }
-//        item[end] = x;
-        if (end == sizeArray) { // go to start of the array
-            item[end - 1] = x;
+        item[end] = x;
+        if (end + 1 == sizeArray) { // go to start of the array
             end = 0;
         } else { // simply add in the back
-            item[end] = x;
             end++;
         }
         sizeQueue++;
@@ -192,7 +170,7 @@ public class ArrayDeque<T> {
 
         if (endInFrontOfStart()) {
             if (start + index >= sizeArray) {
-                return item[index - (sizeArray - start)];
+                return item[start + index - sizeArray];
             } else {
                 return item[start + index];
             }
