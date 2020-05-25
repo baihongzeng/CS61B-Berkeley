@@ -54,14 +54,14 @@ public class ArrayDeque<T> {
 
     /*Returns the number of items in the deque.*/
     public int size() {
-        return (end - start + 1);
+        return (end - start);
     }
 
     /*resize T[] item down when too many items are removed.*/
     public void resizeDown() {
         T[] destArray = (T[]) new Object[(int) (sizeArray * usageRatio)];
-        int larger = (end > (int)usageRatio * 2 * sizeArray) ?
-                end : ((int)usageRatio * 2 * sizeArray);
+        int larger = (end > (int) usageRatio * 2 * sizeArray)
+                ? end : ((int) usageRatio * 2 * sizeArray);
         System.arraycopy(item, start, destArray, 0, larger - start + 1);
         item = destArray;
         sizeArray = larger - start;
