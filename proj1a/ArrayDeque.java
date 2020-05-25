@@ -9,59 +9,59 @@ public class ArrayDeque<T> {
     private final double expandRatio = 1.5;
     private final double usageRatio = 0.25;
 
-    public static void main(String[] args) {
-        ArrayDeque array = new ArrayDeque();
-        array.addFirst(0);
-        array.get(0); //      ==> 0
-        array.removeLast(); //      ==> 0
-        array.addLast(3);
-        array.addLast(4);
-        array.addFirst(5);
-        array.removeFirst(); //     ==> 5
-        array.removeFirst(); //     ==> 4
-    }
+//    public static void main(String[] args) {
+//        ArrayDeque array = new ArrayDeque();
+//        array.addFirst(0);
+//        array.get(0); //      ==> 0
+//        array.removeLast(); //      ==> 0
+//        array.addLast(3);
+//        array.addLast(4);
+//        array.addFirst(5);
+//        array.removeFirst(); //     ==> 5
+//        array.removeFirst(); //     ==> 4
+//    }
 
     /*check if the array is separated into two segments or one continuous segment*/
     private boolean endInFrontOfStart() {
         return end <= start;
     }
 
+    /*increase the size of embedded array*/
     private void resize() {
         int newLength = (int) (sizeArray * expandRatio);
-        T[] destArray = (T[]) new Object[newLength];
+        T[] newArray = (T[]) new Object[newLength];
         if (endInFrontOfStart()) { // end is in front of start, two segments
-            System.arraycopy(item, 0, destArray, 0, end); //copy mid - end portion
+            System.arraycopy(item, 0, newArray, 0, end); //copy mid - end portion
             System.arraycopy(item, start,
-                    destArray, newLength - (sizeArray - start), //newLength - oldLength
+                    newArray, newLength - (sizeArray - start),
                     sizeArray - start); // copy start - mid portion
             start = newLength - (sizeArray - start);
             end = end;
         } else { // start is in front of end, one segment
-            System.arraycopy(item, start, destArray, 0, sizeQueue);
+            System.arraycopy(item, start, newArray, 0, sizeQueue);
             start = 0;
             end = start + sizeQueue;
         }
-        item = destArray;
+        item = newArray;
         sizeArray = newLength;
     }
 
     /*resize T[] item down when too many items are removed.*/
     private void resizeDown() {
         int newLength = (int) (sizeArray * usageRatio * 2);
-        T[] destArray = (T[]) new Object[newLength];
-//        int larger = (end > (int) usageRatio * 2 * sizeArray)
-//                ? end : ((int) usageRatio * 2 * sizeArray);
-        if (endInFrontOfStart()) {
-            System.arraycopy(item, 0, destArray, 0, end);
-            System.arraycopy(item, start, destArray, newLength - (sizeArray - start),
-                    sizeArray - start);
+        T[] newArray = (T[]) new Object[newLength];
+
+        if (endInFrontOfStart()) { // end is in front of start, two segments
+            System.arraycopy(item, 0, newArray, 0, end); //copy mid - end portion
+            System.arraycopy(item, start, newArray, newLength - (sizeArray - start),
+                    sizeArray - start); // copy start - mid portion
             start = newLength - (sizeArray - start);
         } else {
-            System.arraycopy(item, start, destArray, 0, sizeQueue);
+            System.arraycopy(item, start, newArray, 0, sizeQueue);
             start = 0;
             end = start + sizeQueue;
         }
-        item = destArray;
+        item = newArray;
         sizeArray = newLength;
     }
 
@@ -73,25 +73,11 @@ public class ArrayDeque<T> {
 
         if (start - 1 < 0) { // go to the back of array
             start = sizeArray - 1;
-        } else { // simply add in front
+        } else {             // simply add in front
             start = start - 1;
         }
         item[start] = x;
         sizeQueue++;
-//        if (start == 0) {
-//            T temp = x;
-//            for (int i = start; i <= end; i++) {
-//                T temp2 = item[i];
-//                item[i] = temp;
-//                temp = temp2;
-//            }
-//            end++;
-//            sizeQueue = size();
-//        } else {
-//            item[start - 1] = x;
-//            start--;
-//            sizeQueue = size();
-//        }
     }
 
     /*Adds an item of type T to the back of the deque.*/
@@ -102,7 +88,7 @@ public class ArrayDeque<T> {
         item[end] = x;
         if (end + 1 == sizeArray) { // go to start of the array
             end = 0;
-        } else { // simply add in the back
+        } else {                    // simply add in the back
             end++;
         }
         sizeQueue++;
@@ -180,6 +166,7 @@ public class ArrayDeque<T> {
 
     }
 
+    /*constructor*/
     public ArrayDeque() {
         item = (T[]) new Object[sizeArray];
     }
