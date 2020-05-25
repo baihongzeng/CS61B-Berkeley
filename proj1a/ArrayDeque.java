@@ -9,7 +9,11 @@ public class ArrayDeque<T> {
 
     public static void main(String[] args) {
         ArrayDeque array = new ArrayDeque();
-        array.resize();
+//        array.resize();
+        array.addFirst(0);
+        array.addFirst(1);
+        array.removeFirst();
+        array.removeFirst();
     }
     private void resize() {
         T[] destArray = (T[]) new Object[(int) (sizeArray * expandRatio)];
@@ -32,9 +36,11 @@ public class ArrayDeque<T> {
                 temp = temp2;
             }
             end++;
+            sizeQueue = size();
         } else {
             item[start - 1] = x;
             start--;
+            sizeQueue = size();
         }
     }
 
@@ -45,6 +51,7 @@ public class ArrayDeque<T> {
         }
         item[end] = x;
         end++;
+        sizeQueue = size();
     }
 
     /*Returns true if deque is empty, false otherwise.*/
@@ -58,13 +65,15 @@ public class ArrayDeque<T> {
     }
 
     /*resize T[] item down when too many items are removed.*/
-    public void resizeDown() {
+    private void resizeDown() {
         T[] destArray = (T[]) new Object[(int) (sizeArray * usageRatio)];
         int larger = (end > (int) usageRatio * 2 * sizeArray)
                 ? end : ((int) usageRatio * 2 * sizeArray);
         System.arraycopy(item, start, destArray, 0, larger - start + 1);
         item = destArray;
-        sizeArray = larger - start;
+        sizeArray = larger - start + 1;
+        start = 0;
+        end = start + sizeQueue;
     }
     /*Removes and returns the item at the front of the deque.
     If no such item exists, returns null.*/
@@ -79,6 +88,7 @@ public class ArrayDeque<T> {
         item[start] = null; //reset the unused element to be null,
         // so that no pointer is pointing to that memory, garbage collector can free it
         start++;
+        sizeQueue = size();
         return front;
     }
 
@@ -94,6 +104,7 @@ public class ArrayDeque<T> {
         item[end - 1] = null; //reset the unused element to be null,
         // so that no pointer is pointing to that memory, garbage collector can free it
         end--;
+        sizeQueue = size();
         return back;
     }
 
