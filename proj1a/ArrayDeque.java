@@ -11,16 +11,23 @@ public class ArrayDeque<T> {
 
     public static void main(String[] args) {
         ArrayDeque array = new ArrayDeque();
-//        array.addLast(0)
-//        array.removeFirst()     ==> 0
-//        array.addLast(2)
-//        array.removeFirst()     ==> 2
-//        array.addLast(4)
+        array.addFirst(0);
+        array.size();
+        array.addFirst(2);
+        array.addLast(3);
+        array.addLast(4);
+        array.addLast(5);
+        array.addLast(6);
+        array.addFirst(7);
+        array.size();
+        array.size();
+        array.addLast(10);
+        array.addFirst(11);
     }
 
     /*check if the array is separated into two segments or one continuous segment*/
     private boolean endInFrontOfStart() {
-        return end < start;
+        return end <= start;
     }
 
     private void resize() {
