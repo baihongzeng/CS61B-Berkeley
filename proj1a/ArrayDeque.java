@@ -96,13 +96,12 @@ public class ArrayDeque<T> {
         if (sizeQueue >= sizeArray) {
             resize();
         }
-
+        item[end] = x;
         if (end + 1 == sizeArray) { // go to start of the array
             end = 0;
         } else { // simply add in the back
             end++;
         }
-        item[end] = x;
         sizeQueue++;
     }
 
