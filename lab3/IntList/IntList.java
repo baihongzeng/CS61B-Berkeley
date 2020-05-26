@@ -122,26 +122,26 @@ public class IntList {
         if (L == null) {
             return null;
         }
-        IntList temp_front = new IntList(0, null);
-        IntList temp_back = new IntList(0, null);
+        IntList tempFront = new IntList(0, null);
+        IntList tempBack = new IntList(0, null);
         int counter = 0;
         while (L.rest != null) {
-            temp_back = L.rest;
+            tempBack = L.rest;
 
             if (counter == 0) {
                 L.rest = null;
             } else {
-                L.rest = temp_front;
+                L.rest = tempFront;
             }
 
-            temp_front = L;
-            L = temp_back;
+            tempFront = L;
+            L = tempBack;
             counter++;
         }
         if (counter == 0 && L.rest == null) {
             return null;
         } else {
-            L.rest = temp_front;
+            L.rest = tempFront;
         }
 
 
