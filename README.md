@@ -5,3 +5,5 @@ Course website: https://sp18.datastructur.es/index.html
 
 Remember to add librarys for each project manually to solve the issues of not finding libraries like junit.
 In IntelliJ IDEA, File - Project Structure - Project Settings - Libraries - + - Java - Path/CS61B-Berkeley/library-sp18-Javalib.
+
+Plugins (style checker, Java Visualizer, Java Libraries) installation guidance: https://sp18.datastructur.es/materials/guides/plugin.html#using-the-plugin
