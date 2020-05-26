@@ -113,7 +113,40 @@ public class IntList {
         return newA;
     }
 
+    /**
+     * Returns the reverse of the given IntList.
+     * This method is destructive. If given null
+     * as an input, returns null.
+     */
+    public static IntList reverse(IntList L) {
+        if (L == null) {
+            return null;
+        }
+        IntList temp_front = new IntList(0, null);
+        IntList temp_back = new IntList(0, null);
+        int counter = 0;
+        while (L.rest != null) {
+            temp_back = L.rest;
 
+            if (counter == 0) {
+                L.rest = null;
+            } else {
+                L.rest = temp_front;
+            }
+
+            temp_front = L;
+            L = temp_back;
+            counter++;
+        }
+        if (counter == 0 && L.rest == null) {
+            return null;
+        } else {
+            L.rest = temp_front;
+        }
+
+
+        return L;
+    }
 
 
 

@@ -27,6 +27,19 @@ public class IntListTest {
         assertEquals(IntList.of(1, 4, 9), L);
     }
 
+    @Test
+    public void testReverseList() {
+        IntList L = new IntList(); //L points to (0, null)
+        assertEquals(null, IntList.reverse(L));
+
+        IntList L1 = IntList.reverse(null); //reverse(null) still gives null, so L1 points to null
+        assertEquals(null, L1);
+
+        IntList L2 = IntList.of(1, 2, 3); //
+        assertNotEquals(L2, IntList.reverse(L2));
+
+    }
+
     /**
      * Do not use the new keyword in your tests. You can create
      * lists using the handy IntList.of method.
