@@ -119,31 +119,21 @@ public class IntList {
      * as an input, returns null.
      */
     public static IntList reverse(IntList L) {
-        if (L == null) {
+        if (L == null || L.rest == null) {
             return null;
         }
-        IntList tempFront = new IntList(0, null);
+        IntList tempFront = null;
         IntList tempBack = new IntList(0, null);
         int counter = 0;
         while (L.rest != null) {
             tempBack = L.rest;
-
-            if (counter == 0) {
-                L.rest = null;
-            } else {
-                L.rest = tempFront;
-            }
+            L.rest = tempFront;
 
             tempFront = L;
             L = tempBack;
             counter++;
         }
-        if (counter == 0 && L.rest == null) {
-            return null;
-        } else {
-            L.rest = tempFront;
-        }
-
+        L.rest = tempFront;
 
         return L;
     }
