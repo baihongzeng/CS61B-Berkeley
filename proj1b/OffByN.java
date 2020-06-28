@@ -1,4 +1,4 @@
-public class OffByN {
+public class OffByN implements CharacterComparator{
     private int n;
     /*constructor: return an object whose equalChars
     method returns true for characters that are off by N*/
