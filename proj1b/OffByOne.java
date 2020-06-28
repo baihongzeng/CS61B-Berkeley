@@ -5,10 +5,6 @@ public class OffByOne implements CharacterComparator{
         int x_int = x;
         int y_int = y;
 
-        if (Math.abs(x_int - y_int) == 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return Math.abs(x_int - y_int) == 1;
     }
 }
