@@ -1,4 +1,4 @@
-public class LinkedListDeque<T> { // use circular linked list as data structure
+public class LinkedListDeque<T> implements Deque<T> { // use circular linked list as data structure
     /*Nested class, representing elements in linked list deque*/
     private class Node { //should be private
         private T item;
@@ -18,6 +18,7 @@ public class LinkedListDeque<T> { // use circular linked list as data structure
 
     /*Adds an item of type T to the front of the deque.
      * time complexity: O(1)*/
+    @Override
     public void addFirst(T item) {
         Node current = new Node(item);
         current.next = head.next;
@@ -30,6 +31,7 @@ public class LinkedListDeque<T> { // use circular linked list as data structure
 
     /* Adds an item of type T to the back of the deque.
      * time complexity: O(1)*/
+    @Override
     public void addLast(T item) {
         Node current = new Node(item);
         current.prev = head.prev;
@@ -41,17 +43,20 @@ public class LinkedListDeque<T> { // use circular linked list as data structure
     }
 
     /*Returns true if deque is empty, false otherwise.*/
+    @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
     /*Returns the number of items in the deque.*/
+    @Override
     public int size() {
         return size;
     }
 
     /*Removes and returns the item at the front of the deque.
     If no such item exists, returns null.*/
+    @Override
     public T removeFirst() {
         if (size == 0) {
             return null;
@@ -65,6 +70,7 @@ public class LinkedListDeque<T> { // use circular linked list as data structure
     }
 
     /*Removes and returns the item at the back of the deque. If no such item exists, returns null.*/
+    @Override
     public T removeLast() {
         if (size == 0) {
             return null;
@@ -80,6 +86,7 @@ public class LinkedListDeque<T> { // use circular linked list as data structure
     /*Gets the item at the given index, where 0 is the front, 1 is the next item, and so forth.
     If no such item exists, returns null. Must not alter the deque!
     time complexity: O(n)*/
+    @Override
     public T get(int index) {
         if (size == 0 || index >= size || index < 0) { //corner case
             return null;
@@ -122,6 +129,7 @@ public class LinkedListDeque<T> { // use circular linked list as data structure
     }
 
     /*Prints the items in the deque from first to last, separated by a space.*/
+    @Override
     public void printDeque() {
         Node current = head;
         int count = 0;

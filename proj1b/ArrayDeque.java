@@ -1,6 +1,6 @@
 /*use circular array to do! no linear array
 * useful circular array link: https://blog.csdn.net/yyoc97/article/details/88759562*/
-public class ArrayDeque<T> {
+public class ArrayDeque<T> implements Deque<T> {
     private T[] item;
     private int start = 0;
     private int end = 0;
@@ -9,6 +9,7 @@ public class ArrayDeque<T> {
     private final double expandRatio = 1.5;
     private final double usageRatio = 0.25;
 
+//    for testing purpose
 //    public static void main(String[] args) {
 //        ArrayDeque array = new ArrayDeque();
 //        array.addFirst(0);
@@ -66,6 +67,7 @@ public class ArrayDeque<T> {
     }
 
     /*Adds an item of type T to the front of the deque.*/
+    @Override
     public void addFirst(T x) {
         if (sizeQueue >= sizeArray) {
             resize();
@@ -81,6 +83,7 @@ public class ArrayDeque<T> {
     }
 
     /*Adds an item of type T to the back of the deque.*/
+    @Override
     public void addLast(T x) {
         if (sizeQueue >= sizeArray) {
             resize();
@@ -95,17 +98,20 @@ public class ArrayDeque<T> {
     }
 
     /*Returns true if deque is empty, false otherwise.*/
+    @Override
     public boolean isEmpty() {
         return size() == 0;
     }
 
     /*Returns the number of items in the deque.*/
+    @Override
     public int size() {
         return sizeQueue;
     }
 
     /*Removes and returns the item at the front of the deque.
     If no such item exists, returns null.*/
+    @Override
     public T removeFirst() {
         if (sizeQueue <= 0) {
             return null;
@@ -127,6 +133,7 @@ public class ArrayDeque<T> {
 
     /*Removes and returns the item at the back of the deque.
     If no such item exists, returns null.*/
+    @Override
     public T removeLast() {
         if (sizeQueue <= 0) {
             return null;
@@ -149,6 +156,7 @@ public class ArrayDeque<T> {
     /*Gets the item at the given index,
     where 0 is the front, 1 is the next item, and so forth.
     If no such item exists, returns null. Must not alter the deque!*/
+    @Override
     public T get(int index) {
         if (sizeQueue <= 0 || index < 0 || index >= sizeArray) {
             return null;
@@ -168,10 +176,12 @@ public class ArrayDeque<T> {
 
     /*constructor*/
     public ArrayDeque() {
+
         item = (T[]) new Object[sizeArray];
     }
 
     /*Prints the items in the deque from first to last, separated by a space.*/
+    @Override
     public void printDeque() {
         if (endInFrontOfStart()) {
             for (int i = start; i < sizeArray; i++) {
